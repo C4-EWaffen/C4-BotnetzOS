@@ -60,3 +60,30 @@ CREATE TABLE CVE_Devices (
     FOREIGN KEY (device_id) REFERENCES Devices(device_id),
     PRIMARY KEY (cve_id, device_id)
 );
+
+-- Tabelle für die Netzwerkscans
+CREATE TABLE Network_Scans (
+    scan_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    ip_address TEXT NOT NULL,
+    hostname TEXT,
+    mac_address TEXT,
+    is_gateway BOOLEAN,
+    is_online BOOLEAN,
+    open_ports TEXT,  -- z.B. "22,80,443"
+    scan_time DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabelle für die Subnetze
+CREATE TABLE Subnets (
+    subnet_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    ip_range TEXT NOT NULL,  -- z.B. "192.168.2.0/24"
+    network_address TEXT,
+    broadcast_address TEXT,
+    smallest_host TEXT,
+    largest_host TEXT,
+    total_hosts INTEGER,
+    free_hosts INTEGER,
+    used_hosts INTEGER,
+    scan_time DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
